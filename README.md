@@ -1,18 +1,26 @@
-# http-error-stream [![stability][0]][1]
+# http-error-stream [![stability][1]][1]
 [![npm version][2]][3] [![build status][4]][5] [![test coverage][6]][7]
 [![downloads][8]][9] [![js-standard-style][10]][11]
 
-Stream an error over http.
+Stream an error over http. Takes a `server-error` error and streams it back
+out.
 
 ## Usage
 ```js
-const http-error-stream = require('http-error-stream')
+const errorStream = require('http-error-stream')
+const serverError = require('server-error')
+const bole = require('bole')
+const http = require('http')
 
-http-error-stream()
+const log = bole('my-service')
+const error = serverError(log)
+
+http.createServer(function (req, res) {
+  const err = error.client('oh no!')
+  // set statusCode, content-type and stream error as JSON
+  errorStream(req, res, err).pipe(res)
+}).listen
 ```
-
-## API
-### http-error-stream
 
 ## Installation
 ```sh
