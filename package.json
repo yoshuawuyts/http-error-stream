@@ -1,6 +1,6 @@
 {
   "name": "http-error-stream",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Stream an error over http",
   "main": "index.js",
   "scripts": {
